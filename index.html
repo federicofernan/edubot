@@ -3,32 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Folo — Never miss an inquiry again.</title>
+  <title>Folo — Stop Losing Leads While You Sleep.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
   <style>
-    /* ─── CSS Variables ─────────────────────────────── */
     :root {
-      --teal: #00D4A0;
-      --teal-light: #E6FAF5;
-      --teal-mid: #00B889;
+      --green: #1a7a4a;
+      --green-bright: #00c86e;
+      --green-light: #e6f7ef;
+      --green-mid: #15a058;
       --black: #111111;
-      --gray-900: #1a1a1a;
-      --gray-600: #555;
-      --gray-400: #999;
-      --gray-200: #e5e5e5;
-      --gray-100: #f5f5f5;
+      --gray-800: #2a2a2a;
+      --gray-600: #666;
+      --gray-400: #aaa;
+      --gray-200: #e0ddd7;
+      --gray-100: #f5f3ef;
       --white: #ffffff;
       --radius: 16px;
-      --radius-sm: 8px;
+      --radius-sm: 10px;
       --radius-pill: 999px;
+      --urgent: #ef4444;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--white);
@@ -37,7 +36,7 @@
       overflow-x: hidden;
     }
 
-    /* ─── NAV ─────────────────────────────────────── */
+    /* ── NAV ── */
     nav {
       display: flex;
       align-items: center;
@@ -45,892 +44,620 @@
       padding: 20px 48px;
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       z-index: 100;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 600;
       letter-spacing: -0.5px;
       color: var(--black);
       text-decoration: none;
     }
+    .logo-icon {
+      width: 22px; height: 22px;
+      background: var(--black);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo span { color: var(--green-bright); }
 
-    .logo span { color: var(--teal); }
-
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .nav-actions { display: flex; align-items: center; gap: 20px; }
 
     .btn-ghost {
-      padding: 10px 20px;
+      padding: 9px 20px;
       border: 1.5px solid var(--gray-200);
       border-radius: var(--radius-pill);
       background: transparent;
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--black);
-      cursor: pointer;
+      font-size: 14px; font-weight: 500;
+      color: var(--black); cursor: pointer;
       text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s;
     }
-    .btn-ghost:hover { border-color: var(--black); background: var(--gray-100); }
+    .btn-ghost:hover { border-color: var(--black); }
 
-    .btn-primary {
-      padding: 10px 22px;
-      border-radius: var(--radius-pill);
-      background: var(--black);
-      color: var(--white);
+    .btn-nav-cta {
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1.5px solid var(--black);
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
+      font-size: 14px; font-weight: 700;
+      color: var(--black); text-decoration: none;
+      display: flex; align-items: center; gap: 4px;
+      transition: gap 0.2s;
     }
-    .btn-primary:hover { background: var(--gray-900); transform: translateY(-1px); }
+    .btn-nav-cta:hover { gap: 8px; }
 
-    /* ─── HERO ─────────────────────────────────────── */
+    /* ── HERO ── */
     .hero {
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 80px 48px 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
+      padding: 72px 48px 56px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 16px;
-      border: 1.5px solid var(--teal);
+      padding: 5px 14px;
+      border: 1.5px solid var(--gray-200);
       border-radius: var(--radius-pill);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--teal-mid);
-      width: fit-content;
-      background: var(--teal-light);
+      font-size: 13px; font-weight: 500;
+      color: var(--gray-600);
+      margin-bottom: 28px;
       animation: fadeUp 0.5s ease both;
     }
 
     .hero-title {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(52px, 7vw, 80px);
-      line-height: 1.05;
-      letter-spacing: -2px;
-      color: var(--black);
+      font-size: clamp(58px, 8.5vw, 100px);
+      line-height: 0.96;
+      letter-spacing: -3px;
+      margin-bottom: 14px;
       animation: fadeUp 0.5s 0.1s ease both;
     }
+    .line-fade { color: var(--gray-300, #ccc); }
+    .line-dark { color: var(--black); }
 
-    .hero-title em {
+    .hero-subtitle {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 3vw, 30px);
+      color: var(--green-bright);
       font-style: italic;
-      color: var(--teal);
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+      animation: fadeUp 0.5s 0.15s ease both;
     }
 
-    .hero-sub {
-      font-size: 18px;
-      line-height: 1.6;
+    .hero-body {
+      font-size: 16px; line-height: 1.65;
       color: var(--gray-600);
-      max-width: 580px;
+      max-width: 520px;
+      margin-bottom: 32px;
       animation: fadeUp 0.5s 0.2s ease both;
     }
+    .hero-body strong { color: var(--black); font-weight: 600; }
 
     .hero-ctas {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      margin-bottom: 48px;
+      animation: fadeUp 0.5s 0.25s ease both;
+    }
+
+    .btn-arrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 700;
+      color: var(--black); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      transition: gap 0.2s;
+    }
+    .btn-arrow:hover { gap: 10px; }
+
+    .btn-outline {
+      padding: 13px 26px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--gray-200);
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 500;
+      color: var(--gray-600); text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--black); color: var(--black); }
+
+    .stats-row {
+      display: flex; gap: 0;
       animation: fadeUp 0.5s 0.3s ease both;
     }
-
-    .btn-cta-primary {
-      padding: 14px 28px;
-      border-radius: var(--radius-pill);
-      background: var(--black);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-      transition: transform 0.15s, background 0.2s;
+    .stat-item {
+      padding-right: 32px; margin-right: 32px;
+      border-right: 1px solid var(--gray-200);
     }
-    .btn-cta-primary:hover { background: #222; transform: translateY(-2px); }
-
-    .btn-cta-secondary {
-      padding: 14px 28px;
-      border-radius: var(--radius-pill);
-      background: transparent;
-      color: var(--black);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1.5px solid var(--gray-200);
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    .stat-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px; letter-spacing: -1px;
+      color: var(--black); display: block;
     }
-    .btn-cta-secondary:hover { border-color: var(--black); background: var(--gray-100); transform: translateY(-2px); }
+    .stat-label { font-size: 13px; color: var(--gray-400); display: block; margin-top: 2px; }
 
-    /* ─── SOCIAL PROOF ─────────────────────────────── */
-    .social-proof {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      animation: fadeUp 0.5s 0.4s ease both;
+    /* ── CHAT CARD ── */
+    .hero-card-wrap {
+      max-width: 800px; margin: 0 auto; padding: 0 48px 48px;
     }
-
-    .avatars {
-      display: flex;
-    }
-    .avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid var(--white);
-      background: var(--gray-200);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--gray-600);
-      margin-left: -8px;
-    }
-    .avatar:first-child { margin-left: 0; }
-    .avatar.a1 { background: #dbeafe; color: #1e40af; }
-    .avatar.a2 { background: #fce7f3; color: #9d174d; }
-    .avatar.a3 { background: #dcfce7; color: #166534; }
-    .avatar.a4 { background: #fef9c3; color: #854d0e; }
-
-    .social-text {
-      font-size: 13px;
-      color: var(--gray-600);
-    }
-    .social-text strong { color: var(--black); font-weight: 600; }
-
-    /* ─── CHAT WIDGET DEMO ─────────────────────────── */
-    .hero-demo {
-      margin: 0 auto;
-      max-width: 900px;
-      padding: 0 48px 60px;
-      animation: fadeUp 0.6s 0.5s ease both;
-    }
-
     .chat-demo-card {
       background: var(--white);
       border: 1.5px solid var(--gray-200);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
-      max-width: 460px;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.07);
+      max-width: 480px;
     }
-
     .chat-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 16px 20px;
       border-bottom: 1px solid var(--gray-200);
     }
-
-    .chat-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
+    .chat-brand { display: flex; align-items: center; gap: 10px; }
     .chat-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--teal);
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--green-bright);
       animation: pulse 2s infinite;
     }
-
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(0.9); }
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.5; transform:scale(0.85); }
     }
-
     .chat-brand-name { font-size: 14px; font-weight: 600; }
-    .chat-brand-status { font-size: 11px; color: var(--teal); }
-    .chat-biz { text-align: right; font-size: 12px; color: var(--gray-400); }
-    .chat-biz strong { display: block; font-size: 13px; color: var(--black); font-weight: 500; }
-
+    .chat-brand-status { font-size: 11px; color: var(--green-mid); }
+    .chat-biz { text-align: right; }
+    .chat-biz strong { display: block; font-size: 13px; font-weight: 500; }
+    .chat-biz span { font-size: 11px; color: var(--gray-400); }
     .chat-body {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      min-height: 200px;
-      background: var(--gray-100);
+      padding: 20px; display: flex; flex-direction: column; gap: 12px;
+      background: var(--gray-100); min-height: 180px;
     }
-
-    .chat-msg {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-    }
-
-    .chat-msg.bot .bubble {
-      background: var(--white);
-      color: var(--black);
-      border-radius: 16px 16px 16px 4px;
-      padding: 10px 14px;
-      font-size: 13px;
-      line-height: 1.5;
-      max-width: 280px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-
-    .chat-msg.user {
-      justify-content: flex-end;
-    }
-
-    .chat-msg.user .bubble {
-      background: var(--black);
-      color: var(--white);
-      border-radius: 16px 16px 4px 16px;
-      padding: 10px 14px;
-      font-size: 13px;
-      line-height: 1.5;
-      max-width: 240px;
-    }
-
+    .chat-msg { display: flex; gap: 8px; align-items: flex-end; }
     .bot-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 14px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--green-bright);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; flex-shrink: 0;
     }
-
+    .chat-msg.bot .bubble {
+      background: var(--white); color: var(--black);
+      border-radius: 16px 16px 16px 4px;
+      padding: 10px 14px; font-size: 13px; line-height: 1.5;
+      max-width: 300px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .chat-msg.user { justify-content: flex-end; }
+    .chat-msg.user .bubble {
+      background: var(--black); color: var(--white);
+      border-radius: 16px 16px 4px 16px;
+      padding: 10px 14px; font-size: 13px; line-height: 1.5; max-width: 260px;
+    }
     .chat-input-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
-      border-top: 1px solid var(--gray-200);
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; border-top: 1px solid var(--gray-200);
       background: var(--white);
     }
-
     .chat-input-mock {
-      flex: 1;
-      padding: 8px 14px;
-      border: 1.5px solid var(--gray-200);
-      border-radius: var(--radius-pill);
-      font-size: 13px;
-      color: var(--gray-400);
-      background: var(--gray-100);
+      flex: 1; padding: 9px 16px;
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius-pill);
+      font-size: 13px; color: var(--gray-400); background: var(--gray-100);
+      font-family: 'DM Sans', sans-serif;
     }
-
     .chat-send {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border: none;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--green-bright);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: none;
     }
 
-    /* ─── CHANNELS STRIP ────────────────────────────── */
-    .channels-strip {
-      border-top: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-      padding: 24px 48px;
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      flex-wrap: wrap;
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--black); padding: 13px 0; overflow: hidden; white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex; gap: 48px;
+      animation: ticker 22s linear infinite;
+    }
+    .ticker-item {
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    }
+    .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--green-bright); flex-shrink: 0; }
+    .ticker-item span { color: var(--white); }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
+    /* ── CHANNELS ── */
+    .channels-section {
+      border-bottom: 1px solid var(--gray-200); padding: 40px 48px;
+    }
+    .channels-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
     .channels-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gray-400);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      white-space: nowrap;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gray-400);
     }
-
-    .channel-item {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--gray-600);
+    .channels-grid {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap;
     }
-
-    .channel-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
+    .channel-pill {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 18px;
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius-pill);
+      font-size: 14px; font-weight: 500; color: var(--gray-600);
+      transition: border-color 0.2s, color 0.2s;
     }
+    .channel-pill:hover { border-color: var(--green-mid); color: var(--black); }
 
-    .ch-wa { background: #dcfce7; }
-    .ch-web { background: #dbeafe; }
-    .ch-ig { background: #fce7f3; }
-    .ch-tg { background: #e0f2fe; }
-    .ch-tt { background: #f0fdf4; }
-
-    /* ─── SECTION WRAPPER ────────────────────────────── */
-    .section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 48px;
-    }
-
+    /* ── SECTION ── */
+    .section { max-width: 800px; margin: 0 auto; padding: 80px 48px; }
     .section-tag {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--teal-mid);
-      margin-bottom: 16px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green-mid); margin-bottom: 16px;
     }
-
     .section-title {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(36px, 5vw, 52px);
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      color: var(--black);
-      margin-bottom: 16px;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.08; letter-spacing: -1.5px;
+      color: var(--black); margin-bottom: 16px;
     }
-
     .section-sub {
-      font-size: 17px;
-      line-height: 1.6;
-      color: var(--gray-600);
-      max-width: 560px;
-      margin-bottom: 48px;
+      font-size: 17px; line-height: 1.65; color: var(--gray-600);
+      max-width: 540px; margin-bottom: 48px;
     }
 
-    /* ─── HOW IT WORKS ───────────────────────────────── */
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
+    /* ── PROBLEM ── */
+    .problem-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .problem-stat {
+      padding: 28px; border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius); display: flex; flex-direction: column; gap: 6px;
     }
-
-    .step {
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
+    .problem-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 44px; letter-spacing: -2px; color: var(--black);
     }
+    .problem-label { font-size: 13px; font-weight: 600; color: var(--black); }
+    .problem-desc { font-size: 13px; line-height: 1.55; color: var(--gray-600); margin-top: 4px; }
 
-    .step-num {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--black);
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 4px;
+    /* ── HOW IT WORKS ── */
+    .steps-list { display: flex; flex-direction: column; gap: 16px; }
+    .step-card {
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+      padding: 28px 32px; display: flex; gap: 24px; align-items: flex-start;
     }
-
-    .step-content h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 6px;
+    .step-left { display: flex; flex-direction: column; align-items: center; gap: 12px; flex-shrink: 0; }
+    .step-tag { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray-400); letter-spacing: 0.06em; }
+    .step-icon-box {
+      width: 44px; height: 44px;
+      border: 1.5px solid var(--green-bright); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; background: var(--green-light);
     }
+    .step-content h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--green-mid); }
+    .step-content p { font-size: 15px; line-height: 1.6; color: var(--gray-600); }
 
-    .step-content p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--gray-600);
+    /* ── FEATURES ── */
+    .features-list { display: flex; flex-direction: column; }
+    .feature-row {
+      display: flex; align-items: flex-start; gap: 20px;
+      padding: 24px 0; border-bottom: 1px solid var(--gray-200);
     }
-
-    /* ─── INDUSTRIES ─────────────────────────────────── */
-    .industries-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .feature-row:first-child { border-top: 1px solid var(--gray-200); }
+    .feature-icon-box {
+      width: 42px; height: 42px; border: 1.5px solid var(--gray-200);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0; background: var(--gray-100);
     }
+    .feature-text h3 { font-size: 16px; font-weight: 600; color: var(--green-mid); margin-bottom: 4px; }
+    .feature-text p { font-size: 14px; line-height: 1.6; color: var(--gray-600); }
 
-    .industry-card {
-      border: 1.5px solid var(--gray-200);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      background: var(--white);
+    /* ── DASHBOARD ── */
+    .dashboard-card {
+      border: 1.5px solid var(--gray-200); border-radius: 20px;
+      overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.06); margin-top: 40px;
     }
-
-    .industry-card:hover {
-      border-color: var(--teal);
-      box-shadow: 0 4px 20px rgba(0,212,160,0.1);
-    }
-
-    .industry-icon { font-size: 28px; }
-
-    .industry-name {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .industry-desc {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--gray-600);
-    }
-
-    .industry-tag {
-      display: inline-flex;
-      width: fit-content;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .tag-popular { background: var(--teal-light); color: var(--teal-mid); }
-    .tag-fast { background: #fff7ed; color: #c2410c; }
-    .tag-available { background: #f0fdf4; color: #15803d; }
-    .tag-soon { background: var(--gray-100); color: var(--gray-400); }
-
-    /* ─── FEATURES ────────────────────────────────────── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .feature-card {
-      padding: 28px;
-      border-radius: var(--radius);
+    .dash-topbar {
+      padding: 14px 20px; border-bottom: 1px solid var(--gray-200);
+      font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray-600);
       background: var(--gray-100);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
     }
-
-    .feature-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    .dash-alert {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px; border-bottom: 1px solid var(--gray-200); background: var(--white);
     }
-
-    .feature-name {
-      font-size: 16px;
-      font-weight: 600;
+    .dash-alert-text strong { color: var(--black); display: block; font-size: 13px; }
+    .dash-alert-text span { color: var(--gray-400); font-size: 12px; }
+    .lead-row {
+      display: flex; align-items: center; padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-200); gap: 14px; background: var(--white);
     }
-
-    .feature-desc {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--gray-600);
+    .lead-row:last-child { border-bottom: none; }
+    .lead-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
     }
-
-    /* ─── TESTIMONIALS ────────────────────────────────── */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
+    .av-sm { background: #fee2e2; color: #dc2626; }
+    .av-jr { background: #fef9c3; color: #b45309; }
+    .av-pk { background: #f3e8ff; color: #7c3aed; }
+    .av-tw { background: var(--gray-100); color: var(--gray-600); }
+    .lead-info { flex: 1; }
+    .lead-name { font-size: 14px; font-weight: 600; color: var(--black); }
+    .lead-detail { font-size: 12px; color: var(--gray-400); margin-top: 1px; }
+    .lead-status {
+      font-size: 12px; font-weight: 600;
+      padding: 4px 10px; border-radius: var(--radius-pill);
     }
+    .status-urgent { background: #fee2e2; color: var(--urgent); }
+    .status-new { background: var(--green-light); color: var(--green-mid); }
+    .status-done { background: var(--gray-100); color: var(--gray-400); }
 
-    .testi-card {
-      border: 1.5px solid var(--gray-200);
-      border-radius: var(--radius);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      background: var(--white);
+    /* ── PRICING ── */
+    .pricing-center { display: flex; justify-content: center; margin-bottom: 40px; }
+    .pricing-toggle {
+      display: flex; align-items: center;
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius-pill);
+      padding: 4px;
     }
-
-    .stars { color: #f59e0b; font-size: 14px; letter-spacing: 1px; }
-
-    .testi-quote {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--gray-600);
-      flex: 1;
+    .toggle-opt {
+      padding: 8px 20px; border-radius: var(--radius-pill);
+      font-size: 14px; font-weight: 500; cursor: pointer;
+      transition: background 0.2s, color 0.2s; color: var(--gray-400);
     }
+    .toggle-opt.active { background: var(--black); color: var(--white); }
+    .toggle-save { font-size: 12px; font-weight: 700; color: var(--green-mid); margin-left: 4px; }
 
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .author-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .av1 { background: #dbeafe; color: #1e40af; }
-    .av2 { background: #fce7f3; color: #9d174d; }
-    .av3 { background: #fef9c3; color: #854d0e; }
-
-    .author-info { line-height: 1.3; }
-    .author-name { font-size: 13px; font-weight: 600; }
-    .author-role { font-size: 12px; color: var(--gray-400); }
-
-    /* ─── PRICING ─────────────────────────────────────── */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
+    .pricing-cards { display: flex; flex-direction: column; gap: 16px; }
     .pricing-card {
-      border: 1.5px solid var(--gray-200);
-      border-radius: var(--radius);
-      padding: 28px;
-      background: var(--white);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+      padding: 32px; background: var(--white); position: relative;
     }
-
-    .pricing-card.featured {
-      border-color: var(--black);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    .pricing-card.featured { border-color: var(--green-bright); }
+    .most-popular-label {
+      position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+      background: var(--white); border: 1.5px solid var(--green-bright);
+      padding: 4px 16px; border-radius: var(--radius-pill);
+      font-size: 12px; font-weight: 700; color: var(--green-mid); white-space: nowrap;
     }
-
-    .plan-header { display: flex; flex-direction: column; gap: 4px; }
-
     .plan-name {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gray-400);
+      font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.08em; color: var(--gray-400); text-transform: uppercase; margin-bottom: 12px;
     }
-
-    .plan-price {
-      display: flex;
-      align-items: baseline;
-      gap: 4px;
-      margin-top: 8px;
+    .plan-price { display: flex; align-items: baseline; gap: 2px; margin-bottom: 8px; }
+    .price-dollar { font-size: 20px; font-weight: 600; color: var(--gray-600); }
+    .price-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 60px; line-height: 1; letter-spacing: -3px; color: var(--gray-400);
     }
-
-    .price-currency { font-size: 18px; font-weight: 600; color: var(--gray-600); }
-    .price-amount { font-family: 'DM Serif Display', serif; font-size: 44px; line-height: 1; letter-spacing: -2px; }
-    .price-period { font-size: 14px; color: var(--gray-400); }
-
-    .plan-desc { font-size: 14px; color: var(--gray-600); line-height: 1.5; }
-
-    .plan-features {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .pricing-card.featured .price-num { color: var(--black); }
+    .price-mo { font-size: 15px; color: var(--gray-400); }
+    .plan-tagline {
+      font-size: 14px; color: var(--green-mid); margin-bottom: 20px;
+      padding-bottom: 20px; border-bottom: 1px solid var(--gray-200);
     }
-
-    .plan-feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 14px;
-      color: var(--gray-700);
-      line-height: 1.4;
+    .plan-feats { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .plan-feat { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--gray-600); }
+    .feat-check {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--green-light);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .check {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--teal-light);
-      color: var(--teal-mid);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
+    .feat-check svg { width: 10px; height: 10px; }
     .btn-plan {
-      padding: 12px 20px;
-      border-radius: var(--radius-pill);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
+      display: block; width: 100%; padding: 13px 20px; border-radius: var(--radius-pill);
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-align: center; text-decoration: none;
       transition: transform 0.15s, background 0.2s;
-      display: block;
     }
-
-    .btn-plan-outline {
-      border: 1.5px solid var(--gray-200);
-      background: transparent;
-      color: var(--black);
-    }
-    .btn-plan-outline:hover { border-color: var(--black); background: var(--gray-100); transform: translateY(-1px); }
-
-    .btn-plan-dark {
-      border: 1.5px solid var(--black);
-      background: var(--black);
-      color: var(--white);
-    }
+    .btn-plan-outline { border: 1.5px solid var(--gray-200); background: transparent; color: var(--gray-600); }
+    .btn-plan-outline:hover { border-color: var(--black); color: var(--black); }
+    .btn-plan-dark { background: var(--black); border: 1.5px solid var(--black); color: var(--white); }
     .btn-plan-dark:hover { background: #222; transform: translateY(-1px); }
 
-    .popular-tag {
-      font-size: 11px;
-      font-weight: 600;
-      background: var(--black);
-      color: var(--white);
-      padding: 3px 10px;
-      border-radius: var(--radius-pill);
-      width: fit-content;
+    /* ── TESTIMONIALS ── */
+    .testi-cards { display: flex; flex-direction: column; gap: 16px; }
+    .testi-card {
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+      padding: 28px; display: flex; flex-direction: column; gap: 16px;
     }
-
-    /* ─── CTA SECTION ─────────────────────────────────── */
-    .cta-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 48px 80px;
+    .stars { color: #f59e0b; font-size: 14px; letter-spacing: 2px; }
+    .testi-quote { font-size: 15px; line-height: 1.7; color: var(--gray-600); }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .t-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
     }
+    .ta1 { background: #dbeafe; color: #1e40af; }
+    .ta2 { background: #dcfce7; color: #166534; }
+    .ta3 { background: #fce7f3; color: #9d174d; }
+    .t-name { font-size: 14px; font-weight: 600; color: var(--black); }
+    .t-role { font-size: 12px; color: var(--gray-400); }
 
+    /* ── CTA ── */
+    .cta-section { max-width: 800px; margin: 0 auto; padding: 0 48px 80px; }
     .cta-card {
-      background: var(--black);
-      border-radius: 24px;
-      padding: 64px 56px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
+      background: var(--black); border-radius: 24px;
+      padding: 72px 56px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
     }
-
+    .cta-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green-bright);
+    }
     .cta-title {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      color: var(--white);
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05; letter-spacing: -2px; color: var(--white);
     }
-
-    .cta-title em { color: var(--teal); font-style: italic; }
-
-    .cta-sub {
-      font-size: 16px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.6;
+    .cta-sub { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 460px; }
+    .cta-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+    .btn-white {
+      padding: 14px 28px; border-radius: var(--radius-pill);
+      background: var(--white); color: var(--black);
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      border: none; cursor: pointer; transition: transform 0.15s;
+      display: flex; align-items: center; gap: 6px;
     }
-
-    .cta-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn-cta-white {
-      padding: 14px 28px;
-      border-radius: var(--radius-pill);
-      background: var(--white);
-      color: var(--black);
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.15s, background 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-    .btn-cta-white:hover { background: var(--gray-100); transform: translateY(-2px); }
-
-    .btn-cta-outline-white {
-      padding: 14px 28px;
-      border-radius: var(--radius-pill);
-      background: transparent;
-      color: var(--white);
-      font-size: 15px;
-      font-weight: 500;
-      text-decoration: none;
-      border: 1.5px solid rgba(255,255,255,0.3);
-      cursor: pointer;
+    .btn-white:hover { transform: translateY(-2px); }
+    .btn-ghost-white {
+      padding: 14px 28px; border-radius: var(--radius-pill);
+      background: transparent; color: var(--white);
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.25); cursor: pointer;
       transition: border-color 0.2s, transform 0.15s;
     }
-    .btn-cta-outline-white:hover { border-color: rgba(255,255,255,0.7); transform: translateY(-2px); }
+    .btn-ghost-white:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+    .cta-fine { font-size: 13px; color: rgba(255,255,255,0.35); }
 
-    .cta-fine {
-      font-size: 13px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* ─── FOOTER ──────────────────────────────────────── */
+    /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--gray-200);
-      padding: 48px 48px 32px;
-      max-width: 900px;
-      margin: 0 auto;
+      padding: 56px 48px 32px;
+      max-width: 800px; margin: 0 auto;
     }
-
     .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 40px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px; margin-bottom: 40px;
     }
-
-    .footer-brand .logo { font-size: 20px; }
-
-    .footer-tagline {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--gray-400);
-      margin-top: 10px;
-    }
-
+    .footer-tagline { font-size: 14px; line-height: 1.6; color: var(--gray-400); margin-top: 12px; }
     .footer-col h4 {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--gray-400);
-      margin-bottom: 14px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gray-400); margin-bottom: 14px;
     }
-
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
     .footer-col a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.15s; }
     .footer-col a:hover { color: var(--black); }
-
     .footer-bottom {
-      border-top: 1px solid var(--gray-200);
-      padding-top: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      border-top: 1px solid var(--gray-200); padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-
     .footer-copy { font-size: 13px; color: var(--gray-400); }
 
-    /* ─── ANIMATIONS ─────────────────────────────────── */
+    hr.divider { border: none; border-top: 1px solid var(--gray-200); }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── DIVIDER ─────────────────────────────────────── */
-    .divider { border: none; border-top: 1px solid var(--gray-200); margin: 0; }
-
-    /* ─── RESPONSIVE ─────────────────────────────────── */
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .hero, .section, .cta-section, footer { padding-left: 20px; padding-right: 20px; }
-      .hero-demo { padding-left: 20px; padding-right: 20px; }
-      .channels-strip { padding: 20px; gap: 16px; }
-      .hero-title { font-size: 42px; }
-      .industries-grid, .features-grid, .testimonials-grid, .pricing-grid, .footer-grid { grid-template-columns: 1fr; }
-      .cta-card { padding: 40px 24px; }
+      .hero-card-wrap { padding-left: 20px; padding-right: 20px; }
+      .channels-section { padding: 28px 20px; }
+      .problem-stats { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .cta-card { padding: 48px 24px; }
+      .stats-row { flex-direction: column; gap: 16px; }
+      .stat-item { border-right: none; padding-right: 0; margin-right: 0; border-bottom: 1px solid var(--gray-200); padding-bottom: 16px; }
+      .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ─── NAV ───────────────────────────────────────── -->
+  <!-- NAV -->
   <nav>
-    <a href="#" class="logo">fo<span>lo</span></a>
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <rect x="1" y="1" width="4" height="4" rx="1" fill="white"/>
+          <rect x="7" y="1" width="4" height="4" rx="1" fill="white" opacity="0.4"/>
+          <rect x="1" y="7" width="4" height="4" rx="1" fill="white" opacity="0.4"/>
+          <rect x="7" y="7" width="4" height="4" rx="1" fill="#00c86e"/>
+        </svg>
+      </div>
+      fo<span>lo</span>
+    </a>
     <div class="nav-actions">
-      <a href="#" class="btn-ghost">Sign in</a>
-      <a href="#" class="btn-primary">Get started free</a>
+      <a href="#" class="btn-ghost">Log in</a>
+      <a href="#" class="btn-nav-cta">Start free →</a>
     </div>
   </nav>
 
-  <!-- ─── HERO ──────────────────────────────────────── -->
+  <!-- HERO -->
   <section class="hero">
-    <div class="badge">✦ Now live for small businesses</div>
+    <div class="badge">Now live across the US</div>
+
     <h1 class="hero-title">
-      Never miss<br>
-      an <em>inquiry</em><br>
-      again.
+      <span class="line-fade">Stop Losing<br>Leads</span><br>
+      <span class="line-dark">While You<br>Sleep.</span>
     </h1>
-    <p class="hero-sub">
-      Folo captures every inquiry from your website and WhatsApp — 24/7 — and hands it to you as a warm, pre-qualified lead ready to call back.
+
+    <p class="hero-subtitle">Folo captures every inquiry. 24/7.</p>
+
+    <p class="hero-body">
+      Your next customer messaged you at <strong>11pm</strong>. Did you respond? Folo captures, qualifies, and alerts you to every inquiry — so you call back already knowing who, what, and when.
     </p>
+
     <div class="hero-ctas">
-      <a href="#pricing" class="btn-cta-primary">Start free for 14 days</a>
-      <a href="#how" class="btn-cta-secondary">See how it works</a>
+      <a href="#" class="btn-arrow">Get started free →</a>
+      <a href="#how" class="btn-outline">See how it works</a>
     </div>
-    <div class="social-proof">
-      <div class="avatars">
-        <div class="avatar a1">RM</div>
-        <div class="avatar a2">SL</div>
-        <div class="avatar a3">AZ</div>
-        <div class="avatar a4">PK</div>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-num">3x</span>
+        <span class="stat-label">more leads captured</span>
       </div>
-      <span class="social-text"><strong>240+ businesses</strong> trust Folo to capture their leads</span>
+      <div class="stat-item">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">always-on coverage</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5 min</span>
+        <span class="stat-label">setup time</span>
+      </div>
     </div>
   </section>
 
-  <!-- ─── CHAT DEMO ──────────────────────────────────── -->
-  <div class="hero-demo">
+  <!-- CHAT DEMO -->
+  <div class="hero-card-wrap">
     <div class="chat-demo-card">
       <div class="chat-header">
         <div class="chat-brand">
           <div class="chat-dot"></div>
           <div>
             <div class="chat-brand-name">Folo</div>
-            <div class="chat-brand-status">Online now</div>
+            <div class="chat-brand-status">Always online</div>
           </div>
         </div>
         <div class="chat-biz">
-          <strong>Bright Minds Tuition</strong>
-          Education centre
+          <strong>Your Business</strong>
+          <span>Powered by Folo</span>
         </div>
       </div>
       <div class="chat-body">
         <div class="chat-msg bot">
-          <div class="bot-icon">🤖</div>
-          <div class="bubble">Hi! Welcome to Bright Minds Tuition 👋 What subject or year level are you enquiring about?</div>
+          <div class="bot-icon">💬</div>
+          <div class="bubble">Hi! Thanks for reaching out. What can I help you with today?</div>
         </div>
         <div class="chat-msg user">
-          <div class="bubble">Hi, I'm looking for Year 5 maths tuition for my daughter</div>
+          <div class="bubble">Do you have availability this week? I need a consultation.</div>
         </div>
         <div class="chat-msg bot">
-          <div class="bot-icon">🤖</div>
-          <div class="bubble">Great! Can I grab your name and the best number to reach you? The centre owner will call you back shortly 📞</div>
+          <div class="bot-icon">💬</div>
+          <div class="bubble">Absolutely! Can I get your name and best callback number? The owner will reach you shortly 📞</div>
         </div>
       </div>
       <div class="chat-input-row">
-        <div class="chat-input-mock">Type a message…</div>
+        <div class="chat-input-mock">Type a message...</div>
         <button class="chat-send">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
         </button>
@@ -938,56 +665,102 @@
     </div>
   </div>
 
-  <!-- ─── CHANNELS STRIP ─────────────────────────────── -->
-  <div class="channels-strip">
-    <span class="channels-label">Works with</span>
-    <div class="channel-item">
-      <span class="channel-icon ch-wa">📱</span>
-      WhatsApp
-    </div>
-    <div class="channel-item">
-      <span class="channel-icon ch-web">💬</span>
-      Web chat
-    </div>
-    <div class="channel-item">
-      <span class="channel-icon ch-ig">📸</span>
-      Instagram
-    </div>
-    <div class="channel-item">
-      <span class="channel-icon ch-tg">✈️</span>
-      Telegram
-    </div>
-    <div class="channel-item">
-      <span class="channel-icon ch-tt">🎵</span>
-      TikTok
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item"><div class="ticker-dot"></div><span>Zero missed leads</span></div>
+      <div class="ticker-item"><div class="ticker-dot"></div>24/7 inquiry capture</div>
+      <div class="ticker-item"><div class="ticker-dot"></div><span>Instant owner alerts</span></div>
+      <div class="ticker-item"><div class="ticker-dot"></div>Setup in 5 minutes</div>
+      <div class="ticker-item"><div class="ticker-dot"></div><span>Works while you sleep</span></div>
+      <div class="ticker-item"><div class="ticker-dot"></div>No leads left behind</div>
+      <!-- duplicate for seamless loop -->
+      <div class="ticker-item"><div class="ticker-dot"></div><span>Zero missed leads</span></div>
+      <div class="ticker-item"><div class="ticker-dot"></div>24/7 inquiry capture</div>
+      <div class="ticker-item"><div class="ticker-dot"></div><span>Instant owner alerts</span></div>
+      <div class="ticker-item"><div class="ticker-dot"></div>Setup in 5 minutes</div>
+      <div class="ticker-item"><div class="ticker-dot"></div><span>Works while you sleep</span></div>
+      <div class="ticker-item"><div class="ticker-dot"></div>No leads left behind</div>
     </div>
   </div>
 
-  <!-- ─── HOW IT WORKS ───────────────────────────────── -->
+  <!-- CHANNELS -->
+  <div class="channels-section">
+    <div class="channels-inner">
+      <span class="channels-label">Works with</span>
+      <div class="channels-grid">
+        <div class="channel-pill">📱 WhatsApp Business</div>
+        <div class="channel-pill">💬 Web Chat</div>
+        <div class="channel-pill">📸 Instagram DM</div>
+        <div class="channel-pill">💙 Facebook Messenger</div>
+        <div class="channel-pill">✉️ SMS / Text</div>
+        <div class="channel-pill">⚡ Zapier</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section">
+    <div class="section-tag">The Problem</div>
+    <h2 class="section-title">Small businesses lose<br>leads every single day.</h2>
+    <p class="section-sub">Not because of bad products. Because nobody was there to answer when a customer asked.</p>
+
+    <div class="problem-stats">
+      <div class="problem-stat">
+        <div class="problem-num">62%</div>
+        <div class="problem-label">of calls go unanswered</div>
+        <div class="problem-desc">Most small businesses miss over half their inbound calls — especially after hours and on weekends when owners aren't at their desks.</div>
+      </div>
+      <div class="problem-stat">
+        <div class="problem-num">5 min</div>
+        <div class="problem-label">response window</div>
+        <div class="problem-desc">Studies show leads who don't hear back within 5 minutes are 10x less likely to convert. Every hour you wait, you lose ground.</div>
+      </div>
+      <div class="problem-stat">
+        <div class="problem-num">$12K</div>
+        <div class="problem-label">in lost revenue per year</div>
+        <div class="problem-desc">For a typical small business, missed inquiries add up to thousands in lost annual revenue — and you'd never even know they contacted you.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- HOW IT WORKS -->
   <section class="section" id="how">
     <div class="section-tag">How it works</div>
-    <h2 class="section-title">Set up in 5 minutes.<br>Leads flow in automatically.</h2>
-    <p class="section-sub">Folo sits quietly in the background — greeting visitors, asking the right questions, and sending you a clean lead summary so you can focus on the conversation that matters.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
+    <h2 class="section-title">From inquiry to warm lead<br>in under 60 seconds.</h2>
+    <p class="section-sub">Folo works quietly in the background — so you can focus on running your business, not chasing messages.</p>
+
+    <div class="steps-list">
+      <div class="step-card">
+        <div class="step-left">
+          <span class="step-tag">STEP 01</span>
+          <div class="step-icon-box">➕</div>
+        </div>
         <div class="step-content">
-          <h3>Connect your channels</h3>
-          <p>Embed the web chat widget on your site in one line of code. Connect your WhatsApp Business number in minutes. No developer needed.</p>
+          <h3>Embed in 5 minutes</h3>
+          <p>One line of code on your website. Connect your phone number for SMS and WhatsApp. No developer, no agency, no waiting.</p>
         </div>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
+      <div class="step-card">
+        <div class="step-left">
+          <span class="step-tag">STEP 02</span>
+          <div class="step-icon-box">🗨️</div>
+        </div>
         <div class="step-content">
-          <h3>Folo greets every visitor</h3>
-          <p>Your personalised Folo bot engages every inquiry — day or night — collecting the key details so you always have context before you call.</p>
+          <h3>Folo qualifies every lead</h3>
+          <p>Your AI-powered Folo bot greets every visitor, asks the right questions, and collects their name, need, and best time to reach them.</p>
         </div>
       </div>
-      <div class="step">
-        <div class="step-num">03</div>
+      <div class="step-card">
+        <div class="step-left">
+          <span class="step-tag">STEP 03</span>
+          <div class="step-icon-box">📞</div>
+        </div>
         <div class="step-content">
           <h3>You call, already prepared</h3>
-          <p>Get an instant WhatsApp alert with a full lead summary — name, need, urgency, best time to call. Walk into every conversation ready.</p>
+          <p>Get an instant text alert with the full lead summary. Walk into every follow-up call knowing exactly who you're talking to and why.</p>
         </div>
       </div>
     </div>
@@ -995,223 +768,226 @@
 
   <hr class="divider" />
 
-  <!-- ─── INDUSTRIES ─────────────────────────────────── -->
-  <section class="section" id="industries">
-    <div class="section-tag">Industries</div>
-    <h2 class="section-title">Built for businesses<br>that run on relationships.</h2>
-    <p class="section-sub">Folo adapts its conversation flow for your industry — asking the right qualifying questions every time.</p>
-    <div class="industries-grid">
-      <div class="industry-card">
-        <div class="industry-icon">📚</div>
-        <div class="industry-name">Education &amp; tuition</div>
-        <div class="industry-desc">Capture parent inquiries, qualify by year and subject, and hand off to your centre owner for a personal call.</div>
-        <span class="industry-tag tag-popular">Most popular</span>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">🦷</div>
-        <div class="industry-name">Dental clinics</div>
-        <div class="industry-desc">Triage new and existing patients, identify urgency, and book call-backs for your front desk team.</div>
-        <span class="industry-tag tag-fast">Growing fast</span>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">🏥</div>
-        <div class="industry-name">Doctor's offices</div>
-        <div class="industry-desc">Handle appointment inquiries after hours, identify urgency, and route to the right doctor or service.</div>
-        <span class="industry-tag tag-available">Available now</span>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">💆</div>
-        <div class="industry-name">Beauty &amp; wellness</div>
-        <div class="industry-desc">Capture booking inquiries for salons, spas, and clinics — with service type and preferred timing pre-collected.</div>
-        <span class="industry-tag tag-soon">Coming soon</span>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">🏋️</div>
-        <div class="industry-name">Fitness &amp; sports</div>
-        <div class="industry-desc">Qualify gym memberships, personal training, and class enquiries with the right context before you follow up.</div>
-        <span class="industry-tag tag-soon">Coming soon</span>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">⚖️</div>
-        <div class="industry-name">Professional services</div>
-        <div class="industry-desc">Consultants, lawyers, accountants — let Folo qualify the inquiry so your first call is already billable.</div>
-        <span class="industry-tag tag-soon">Coming soon</span>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- ─── FEATURES ───────────────────────────────────── -->
+  <!-- FEATURES -->
   <section class="section" id="features">
     <div class="section-tag">Features</div>
-    <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🌙</div>
-        <div class="feature-name">24/7 after-hours capture</div>
-        <div class="feature-desc">Folo never sleeps. Inquiries that come in at midnight are captured, qualified, and waiting for you at 8am — no lead left behind.</div>
+    <h2 class="section-title">Built for owners,<br>not IT departments.</h2>
+
+    <div class="features-list">
+      <div class="feature-row">
+        <div class="feature-icon-box">🕐</div>
+        <div class="feature-text">
+          <h3>24/7 after-hours capture</h3>
+          <p>Folo never clocks out. Every inquiry that comes in at midnight is captured and waiting for you at 8am — pre-qualified and ready to call.</p>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏢</div>
-        <div class="feature-name">Multi-franchise support</div>
-        <div class="feature-desc">Run Folo across all your franchise locations from one dashboard. Each branch gets its own bot, its own leads, its own owner alerts.</div>
+      <div class="feature-row">
+        <div class="feature-icon-box">💬</div>
+        <div class="feature-text">
+          <h3>Instant SMS &amp; text alerts</h3>
+          <p>The moment a lead is captured, you get a text with their name, number, need, and best callback time. No app needed — just your phone.</p>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <div class="feature-name">Instant WhatsApp alerts</div>
-        <div class="feature-desc">The moment a lead is captured, you get a WhatsApp notification with the full summary — name, number, need, and best time to call.</div>
+      <div class="feature-row">
+        <div class="feature-icon-box">📊</div>
+        <div class="feature-text">
+          <h3>Lead tracking dashboard</h3>
+          <p>See every inquiry in one place. Filter by status, mark leads as contacted, and track your conversion rate across all channels.</p>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <div class="feature-name">Lead tracking dashboard</div>
-        <div class="feature-desc">Track every inquiry from capture to conversion. Mark leads as contacted, see which channels perform best, and never drop the ball.</div>
+      <div class="feature-row">
+        <div class="feature-icon-box">⚙️</div>
+        <div class="feature-text">
+          <h3>Works across any industry</h3>
+          <p>Dental offices, tutoring centers, law firms, plumbers — Folo's conversation flow adapts to your business type automatically.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="dash-topbar">folo — lead dashboard</div>
+      <div class="dash-alert">
+        <div style="font-size:20px;">🔔</div>
+        <div class="dash-alert-text">
+          <strong>New lead — Sarah M.</strong>
+          <span>Dental inquiry · call back after 2pm · (555) 234-5678</span>
+        </div>
+      </div>
+      <div class="lead-row">
+        <div class="lead-avatar av-sm">SM</div>
+        <div class="lead-info">
+          <div class="lead-name">Sarah M.</div>
+          <div class="lead-detail">Dental · after 2pm today</div>
+        </div>
+        <span class="lead-status status-urgent">Urgent</span>
+      </div>
+      <div class="lead-row">
+        <div class="lead-avatar av-jr">JR</div>
+        <div class="lead-info">
+          <div class="lead-name">James R.</div>
+          <div class="lead-detail">Tutoring · Math · tomorrow AM</div>
+        </div>
+        <span class="lead-status status-new">New</span>
+      </div>
+      <div class="lead-row">
+        <div class="lead-avatar av-pk">PK</div>
+        <div class="lead-info">
+          <div class="lead-name">Priya K.</div>
+          <div class="lead-detail">Legal consult · flexible</div>
+        </div>
+        <span class="lead-status status-new">New</span>
+      </div>
+      <div class="lead-row">
+        <div class="lead-avatar av-tw">TW</div>
+        <div class="lead-info">
+          <div class="lead-name">Tom W.</div>
+          <div class="lead-detail">HVAC repair · called back</div>
+        </div>
+        <span class="lead-status status-done">Done</span>
       </div>
     </div>
   </section>
 
   <hr class="divider" />
 
-  <!-- ─── TESTIMONIALS ───────────────────────────────── -->
-  <section class="section" id="testimonials">
-    <div class="section-tag">What people say</div>
-    <h2 class="section-title">Business owners<br>love Folo.</h2>
-    <div class="testimonials-grid">
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">"Before Folo, I'd miss inquiries that came in after 9pm. Now I wake up with a tidy list of parents ready to call. It's like having a receptionist who never sleeps."</p>
-        <div class="testi-author">
-          <div class="author-avatar av1">RM</div>
-          <div class="author-info">
-            <div class="author-name">Roslan Musa</div>
-            <div class="author-role">Owner, Pintar Tuition Centre · KL</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">"Our front desk used to spend 30 minutes every morning calling back enquiries. Folo collects everything overnight — we just work the list. Game changer."</p>
-        <div class="testi-author">
-          <div class="author-avatar av2">DL</div>
-          <div class="author-info">
-            <div class="author-name">Dr. Lim Siew Ching</div>
-            <div class="author-role">Principal Dentist · SmileCare Dental</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">"I was sceptical about AI chat for my clinic, but Folo is different — it just captures and hands off. My patients still get a real doctor. I just don't miss anyone anymore."</p>
-        <div class="testi-author">
-          <div class="author-avatar av3">KN</div>
-          <div class="author-info">
-            <div class="author-name">Dr. Kavitha Nair</div>
-            <div class="author-role">GP · HealthFirst Clinic · PJ</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- ─── PRICING ────────────────────────────────────── -->
+  <!-- PRICING -->
   <section class="section" id="pricing">
-    <div class="section-tag">Pricing</div>
-    <h2 class="section-title">Simple, honest pricing.</h2>
-    <p class="section-sub">No contracts, no surprises. Start free and scale as you grow.</p>
-    <div class="pricing-grid">
-      <!-- Starter -->
+    <div class="section-tag" style="text-align:center;">Pricing</div>
+    <h2 class="section-title" style="text-align:center;">Straightforward pricing.<br>No surprises.</h2>
+
+    <div class="pricing-center">
+      <div class="pricing-toggle">
+        <div class="toggle-opt active" onclick="this.classList.add('active'); this.nextElementSibling.classList.remove('active')">Monthly</div>
+        <div class="toggle-opt" onclick="this.classList.add('active'); this.previousElementSibling.classList.remove('active')">Annual <span class="toggle-save">Save 20%</span></div>
+      </div>
+    </div>
+
+    <div class="pricing-cards">
       <div class="pricing-card">
-        <div class="plan-header">
-          <div class="plan-name">Starter</div>
-          <div class="plan-price">
-            <span class="price-currency">$</span>
-            <span class="price-amount">0</span>
-            <span class="price-period">/mo</span>
-          </div>
-          <div class="plan-desc">Perfect for trying out Folo with one business.</div>
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">
+          <span class="price-dollar">$</span>
+          <span class="price-num">0</span>
+          <span class="price-mo">/mo</span>
         </div>
-        <div class="plan-features">
-          <div class="plan-feature"><div class="check">✓</div>1 business location</div>
-          <div class="plan-feature"><div class="check">✓</div>Web chat widget</div>
-          <div class="plan-feature"><div class="check">✓</div>Up to 30 leads/month</div>
-          <div class="plan-feature"><div class="check">✓</div>Email lead notifications</div>
-          <div class="plan-feature"><div class="check">✓</div>Basic dashboard</div>
+        <div class="plan-tagline">Try Folo free. No credit card needed.</div>
+        <div class="plan-feats">
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>1 business location</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Web chat widget</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Up to 30 leads/month</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Email notifications</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Basic dashboard</div>
         </div>
         <a href="#" class="btn-plan btn-plan-outline">Get started free</a>
       </div>
 
-      <!-- Growth -->
       <div class="pricing-card featured">
-        <div class="plan-header">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-            <div class="plan-name">Growth</div>
-            <span class="popular-tag">Most popular</span>
-          </div>
-          <div class="plan-price">
-            <span class="price-currency">$</span>
-            <span class="price-amount">99</span>
-            <span class="price-period">/mo</span>
-          </div>
-          <div class="plan-desc">For growing businesses that want zero missed leads.</div>
+        <div class="most-popular-label">Most Popular</div>
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">
+          <span class="price-dollar">$</span>
+          <span class="price-num">79</span>
+          <span class="price-mo">/mo</span>
         </div>
-        <div class="plan-features">
-          <div class="plan-feature"><div class="check">✓</div>Up to 3 locations</div>
-          <div class="plan-feature"><div class="check">✓</div>WhatsApp + web chat</div>
-          <div class="plan-feature"><div class="check">✓</div>Unlimited leads</div>
-          <div class="plan-feature"><div class="check">✓</div>WhatsApp owner alerts</div>
-          <div class="plan-feature"><div class="check">✓</div>After-hours mode</div>
-          <div class="plan-feature"><div class="check">✓</div>Full lead dashboard</div>
-          <div class="plan-feature"><div class="check">✓</div>Morning digest</div>
+        <div class="plan-tagline">Everything a growing business needs.</div>
+        <div class="plan-feats">
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Up to 3 locations</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Web chat + SMS alerts</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Unlimited leads</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>After-hours mode</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Full lead dashboard</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Morning digest</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>CRM export</div>
         </div>
-        <a href="#" class="btn-plan btn-plan-dark">Start 14-day free trial</a>
+        <a href="#" class="btn-plan btn-plan-dark">Start 14-day free trial →</a>
       </div>
 
-      <!-- Franchise -->
       <div class="pricing-card">
-        <div class="plan-header">
-          <div class="plan-name">Franchise</div>
-          <div class="plan-price">
-            <span class="price-currency">$</span>
-            <span class="price-amount">299</span>
-            <span class="price-period">/mo</span>
-          </div>
-          <div class="plan-desc">For franchise groups and multi-location businesses.</div>
+        <div class="plan-name">Scale</div>
+        <div class="plan-price">
+          <span class="price-dollar">$</span>
+          <span class="price-num">199</span>
+          <span class="price-mo">/mo</span>
         </div>
-        <div class="plan-features">
-          <div class="plan-feature"><div class="check">✓</div>Unlimited locations</div>
-          <div class="plan-feature"><div class="check">✓</div>All Growth features</div>
-          <div class="plan-feature"><div class="check">✓</div>Franchisor dashboard</div>
-          <div class="plan-feature"><div class="check">✓</div>Per-branch analytics</div>
-          <div class="plan-feature"><div class="check">✓</div>Custom bot scripts</div>
-          <div class="plan-feature"><div class="check">✓</div>Priority support</div>
-          <div class="plan-feature"><div class="check">✓</div>Onboarding included</div>
+        <div class="plan-tagline">For multi-location businesses and franchises.</div>
+        <div class="plan-feats">
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Unlimited locations</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>All Growth features</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Franchisor dashboard</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Custom bot scripts</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Zapier + CRM integrations</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Dedicated onboarding</div>
+          <div class="plan-feat"><div class="feat-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#15a058" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Priority support (SLA)</div>
         </div>
-        <a href="#" class="btn-plan btn-plan-outline">Contact us</a>
+        <a href="#" class="btn-plan btn-plan-outline">Talk to sales</a>
       </div>
     </div>
   </section>
 
-  <!-- ─── CTA ────────────────────────────────────────── -->
+  <hr class="divider" />
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="testimonials">
+    <div class="section-tag">What owners say</div>
+    <h2 class="section-title">Real businesses.<br>Real results.</h2>
+
+    <div class="testi-cards">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"I used to miss 4–5 inquiries a week after hours. Now Folo handles them all and texts me a summary each morning. I've added two new clients just from leads I would've lost."</p>
+        <div class="testi-author">
+          <div class="t-avatar ta1">MR</div>
+          <div>
+            <div class="t-name">Marcus R.</div>
+            <div class="t-role">Owner, Bright Smiles Dental · Austin, TX</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"Setup was literally 5 minutes. I pasted one line of code and Folo was live. The next morning I had 3 leads waiting. At $79/month this is an absolute no-brainer."</p>
+        <div class="testi-author">
+          <div class="t-avatar ta2">JL</div>
+          <div>
+            <div class="t-name">Jennifer L.</div>
+            <div class="t-role">Owner, NextStep Tutoring · Chicago, IL</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"We run 6 locations. Before Folo, each branch had its own chaos. Now everything feeds into one dashboard and I get a single morning briefing. It's changed how we operate."</p>
+        <div class="testi-author">
+          <div class="t-avatar ta3">DK</div>
+          <div>
+            <div class="t-name">David K.</div>
+            <div class="t-role">CEO, PrimeCare Clinics · Miami, FL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
   <div class="cta-section">
     <div class="cta-card">
-      <h2 class="cta-title">Your next customer<br>is <em>already asking.</em></h2>
-      <p class="cta-sub">Set up Folo in under 5 minutes. No credit card needed.<br>Start capturing leads tonight.</p>
+      <span class="cta-tag">Get started today</span>
+      <h2 class="cta-title">Your next customer<br>is asking right now.</h2>
+      <p class="cta-sub">Set up Folo in 5 minutes. Free plan available. No credit card, no contract, no excuses.</p>
       <div class="cta-actions">
-        <a href="#" class="btn-cta-white">Start free for 14 days</a>
-        <a href="#" class="btn-cta-outline-white">Book a demo</a>
+        <a href="#" class="btn-white">Start capturing leads free →</a>
+        <a href="#" class="btn-ghost-white">Book a 15-min demo</a>
       </div>
-      <span class="cta-fine">Free plan available. No credit card required.</span>
+      <span class="cta-fine">Free forever plan · Growth from $79/mo · Cancel anytime</span>
     </div>
   </div>
 
-  <!-- ─── FOOTER ─────────────────────────────────────── -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="logo">fo<span>lo</span></a>
-        <p class="footer-tagline">Never miss an inquiry. Folo captures, qualifies, and hands off every lead so small businesses can focus on people, not paperwork.</p>
+        <p class="footer-tagline">Never miss an inquiry. Folo captures, qualifies, and alerts you to every lead — 24 hours a day, 7 days a week.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
@@ -1223,12 +999,12 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Industries</h4>
+        <h4>Use Cases</h4>
         <ul>
-          <li><a href="#">Education</a></li>
-          <li><a href="#">Dental</a></li>
-          <li><a href="#">Medical</a></li>
-          <li><a href="#">More coming</a></li>
+          <li><a href="#">Dental offices</a></li>
+          <li><a href="#">Tutoring centers</a></li>
+          <li><a href="#">Medical clinics</a></li>
+          <li><a href="#">Home services</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1236,13 +1012,13 @@
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#">Blog</a></li>
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">Terms</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Folo. All rights reserved. Made with care for small businesses.</span>
+      <span class="footer-copy">© 2026 Folo Inc. All rights reserved. Made for American small business owners.</span>
       <a href="https://getfolo.ai" style="font-size:13px; color:var(--gray-400); text-decoration:none;">getfolo.ai</a>
     </div>
   </footer>
